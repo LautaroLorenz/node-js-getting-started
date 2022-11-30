@@ -1,13 +1,12 @@
 const cool = require('cool-ascii-faces');
 const express = require('express')
 const path = require('path')
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 5000;
+const ALLOW_ORIGIN = process.env.DEV_MODE === 'true' ? 'http://localhost:4200' : 'https://lautarolorenz.github.io';
 const cors = require('cors');
 const app = express();
 
-if (process.env.DEV_MODE === 'true') {
-  app.use(cors({ origin: 'http://localhost:4200' }));
-}
+app.use(cors({ origin: ALLOW_ORIGIN }));
 
 app
   .get('/menu-options', (req, res) => res.json([{ value: 'option 1' }, { value: 'option 2' }]));
